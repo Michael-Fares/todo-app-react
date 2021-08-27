@@ -7,7 +7,9 @@ class App extends Component {
   super()
   
   this.state = {
-    isClicked: false
+    isClicked: false,
+    inputValue: "",
+    listOfTodos: []
    }
   }
 
@@ -18,13 +20,27 @@ class App extends Component {
     this.setState({ isClicked : true })
   }
 
+  handleChange = (event) => {
+    this.setState({inputValue : event.target.value})
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    this.setState({listOfTodos: [...this.state.listOfTodos, this.state.inputValue]})
+    this.setState({inputValue: ""})
+    
+  }
+
   render() {
   
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={this.handleClick}>Click Me</button>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.inputValue} onChange={this.handleChange}></input>
+          <button type="submit">Submit</button>
+        </form>
         <p>
           {this.state.isClicked ? "true" : "false"}
         </p>

@@ -41,9 +41,7 @@ class App extends Component {
           <input type="text" value={this.state.inputValue} onChange={this.handleChange}></input>
           <button type="submit">Submit</button>
         </form>
-        <p>
-          {this.state.isClicked ? "true" : "false"}
-        </p>
+        <ol>{this.state.listOfTodos.map((todo, index) => <li key={index}>{todo}</li>)}</ol>
         <a
           className="App-link"
           href="https://reactjs.org"

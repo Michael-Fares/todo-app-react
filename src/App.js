@@ -7,20 +7,24 @@ class App extends Component {
   super()
   
   this.state = {
-    isClicked: false,
     inputValue: "",
     listOfTodos: []
    }
   }
 
-  handleClick = (index) => {
-   this.deleteItem(index)
-  }
-  deleteItem = (index) => {
-    let objectCopy = [...this.state.listOfTodos]
-    objectCopy.splice(index, 1)
-    this.setState({listOfTodos: [...objectCopy]})
 
+  deleteItem = (index) => {
+    let todosCopy = [...this.state.listOfTodos]
+    todosCopy.splice(index, 1)
+    this.setState({listOfTodos: [...todosCopy]})
+  }
+  editItem = (index) => {
+    let todosCopy = [...this.state.listOfTodos]
+    console.log(todosCopy[index])
+    if(this.state.inputValue) {
+    todosCopy[index] = this.state.inputValue
+    }
+    this.setState({listOfTodos: [...todosCopy]})
   }
   handleChange = (event) => {
     this.setState({inputValue : event.target.value})
@@ -31,7 +35,6 @@ class App extends Component {
     // spread operator  ... to spread rest of todos in array
     this.setState({listOfTodos: [...this.state.listOfTodos, this.state.inputValue]})
     this.setState({inputValue: ""})
-    
   }
 
   render() {
@@ -48,10 +51,12 @@ class App extends Component {
         return (
         <div key={index}> 
           <li key={index}>{todo}</li>
-          <button onClick={() => this.handleClick(index)}>Delete</button>
+          <button onClick={() => this.deleteItem(index)}>Delete</button>
+          <button onClick={() => this.editItem(index)}>Edit</button>
           </div>
           )
-        })} </ol>
+        })}
+         </ol>
        
         <a
           className="App-link"

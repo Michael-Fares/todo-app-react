@@ -13,19 +13,22 @@ class App extends Component {
    }
   }
 
-  handleClick = () => {
-    // ternary operator but it can also be an if statement
-    this.state.isClicked ? 
-    this.setState({ isClicked : false }) : 
-    this.setState({ isClicked : true })
+  handleClick = (index) => {
+   this.deleteItem(index)
   }
+  deleteItem = (index) => {
+    let objectCopy = [...this.state.listOfTodos]
+    objectCopy.splice(index, 1)
+    this.setState({listOfTodos: [...objectCopy]})
 
+  }
   handleChange = (event) => {
     this.setState({inputValue : event.target.value})
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
+    // spread operator  ... to spread rest of todos in array
     this.setState({listOfTodos: [...this.state.listOfTodos, this.state.inputValue]})
     this.setState({inputValue: ""})
     
@@ -41,7 +44,15 @@ class App extends Component {
           <input type="text" value={this.state.inputValue} onChange={this.handleChange}></input>
           <button type="submit">Submit</button>
         </form>
-        <ol>{this.state.listOfTodos.map((todo, index) => <li key={index}>{todo}</li>)}</ol>
+        <ol>{this.state.listOfTodos.map((todo, index) => {
+        return (
+        <div key={index}> 
+          <li key={index}>{todo}</li>
+          <button onClick={() => this.handleClick(index)}>Delete</button>
+          </div>
+          )
+        })} </ol>
+       
         <a
           className="App-link"
           href="https://reactjs.org"

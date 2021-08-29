@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TodoCard from './TodoCard'
 
 class App extends Component {
-  constructor() {
-  super()
+  constructor(props) {
+  super(props)
   
   this.state = {
     inputValue: "",
@@ -47,16 +48,12 @@ class App extends Component {
           <input type="text" value={this.state.inputValue} onChange={this.handleChange}></input>
           <button type="submit">Submit</button>
         </form>
-        <ol>{this.state.listOfTodos.map((todo, index) => {
-        return (
-        <div key={index}> 
-          <li key={index}>{todo}</li>
-          <button onClick={() => this.deleteItem(index)}>Delete</button>
-          <button onClick={() => this.editItem(index)}>Edit</button>
-          </div>
-          )
-        })}
-         </ol>
+        <ol> {this.state.listOfTodos.map((todo, index) => {
+              return (
+                <TodoCard key={index} title={todo} index={index} clickToRemove={this.deleteItem}/>
+              )
+          })}
+         </ol>    
        
         <a
           className="App-link"
@@ -64,8 +61,8 @@ class App extends Component {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
-        </a>
+          {this.props.name}     
+       </a>
       </header>
     </div>
   );

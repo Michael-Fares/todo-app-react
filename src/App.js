@@ -12,7 +12,6 @@ class App extends Component {
    }
   }
 
-
   deleteItem = (index) => {
     let todosCopy = [...this.state.listOfTodos]
     todosCopy.splice(index, 1)

@@ -40,10 +40,11 @@ class App extends Component {
   
   return (
     <div className="App">
-      
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.inputValue} onChange={this.handleChange}></input>
-          <button type="submit">Add ToDo</button>
+      <h1>To Do List</h1>
+      <h4>What will <span className="you">you</span> do today?</h4>
+        <form onSubmit={this.handleSubmit} >
+          <input style={{fontFamily: "Quicksand, sans-serif"}} type="text" value={this.state.inputValue} onChange={this.handleChange}></input>
+          <button style={{fontFamily: "Quicksand, sans-serif", border: "none", cursor: "pointer", marginLeft: "5px", padding: "3px"}} type="submit">Add ToDo</button>
         </form>
         <ol> {this.state.listOfTodos.map((todo, index) => {
               return (
